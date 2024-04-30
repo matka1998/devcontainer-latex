@@ -56,6 +56,9 @@
                     "cSpell.showAutocompleteSuggestions": true,
                     "rewrap.autoWrap.enabled": true
                 },
+                "latex-workshop.view.pdf.color.dark.pageColorsBackground": "#171717",
+                "latex-workshop.view.pdf.color.dark.pageColorsForeground": "#FFFFFF",
+                "latex-workshop.view.pdf.color.dark.backgroundColor": "#171717",
                 "ltex.ltex-ls.path": "/usr/share/ltex-ls",
                 "ltex.java.path": "/usr/lib/jvm/default-java",
                 "languageTool.language": "en",

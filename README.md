@@ -61,11 +61,8 @@ This has been extended from [qdm12/latexdevcontainer](https://github.com/qdm12/l
 
  - Inclusion of [`ltex-ls`](https://github.com/valentjn/ltex-ls) to use with the LanguageTool and [LTeX](https://marketplace.visualstudio.com/items?itemName=valentjn.vscode-ltex) extensions to provide grammar and spell checking in tex documents.
  - Inclusion of [`inskscape`](https://inkscape.org) to allow the inclusion of SVG graphics in tex documents.
+ - Dark mode PDF preview mode.
  - No explicit reference to the texlive version in the Dockerfile.
  - No use of `docker-compose` to simplify the devcontainer setup process.
  - Vanilla debian used as the base rather than a specific set of dotfiles (since
    dotfiles can be added via devcontainer features...).
-
-
-
-
