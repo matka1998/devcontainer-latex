@@ -2,7 +2,7 @@ FROM debian:bookworm-slim AS chktex
 WORKDIR /tmp/workdir
 RUN apt-get update -yqq && \
     apt-get install -yqq --no-install-recommends g++ make perl wget
-ARG CHKTEX_VERSION=1.7.8
+ARG CHKTEX_VERSION=1.7.9
 RUN wget -qO- http://download.savannah.gnu.org/releases/chktex/chktex-${CHKTEX_VERSION}.tar.gz | \
     tar -xz --strip-components=1
 RUN ./configure && \
