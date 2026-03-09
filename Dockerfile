@@ -3,7 +3,7 @@ WORKDIR /tmp/workdir
 RUN apt-get update -yqq && \
     apt-get install -yqq --no-install-recommends g++ make perl wget ca-certificates && \
     update-ca-certificates
-ARG CHKTEX_VERSION=1.7.9
+ARG CHKTEX_VERSION=1.7.10
 RUN wget -O chktex-${CHKTEX_VERSION}.tar.gz http://download.savannah.gnu.org/releases/chktex/chktex-${CHKTEX_VERSION}.tar.gz
 RUN tar -xz --strip-components=1 -f chktex-${CHKTEX_VERSION}.tar.gz
 RUN ./configure && \
