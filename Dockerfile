@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim AS chktex
 WORKDIR /tmp/workdir
 RUN apt-get update -yqq && \
-    apt-get install -yqq --no-install-recommends g++ make perl wget ca-certificates && \
+    apt-get install -yqq --no-install-recommends g++ make perl wget libncurses5-dev ca-certificates && \
     update-ca-certificates
 ARG CHKTEX_VERSION=1.7.10
 RUN wget -O chktex-${CHKTEX_VERSION}.tar.gz http://download.savannah.gnu.org/releases/chktex/chktex-${CHKTEX_VERSION}.tar.gz
