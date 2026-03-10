@@ -44,7 +44,7 @@ RUN apt-get update -yqq && \
 # TEXLIVE
 WORKDIR /tmp/texlive
 ARG TEX_SCHEME=small
-RUN wget -qO- https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar -xz --strip-components=1 && \
+RUN wget -qO- https://ctan.mirror.cherryfox.dev/systems/texlive/tlnet/install-tl-unx.tar.gz | tar -xz --strip-components=1 && \
     perl install-tl --paper=a4 --scheme=${TEX_SCHEME} --no-doc-install --no-src-install --texdir=/usr/local/texlive --no-interaction && \
     rm -rf /usr/local/texlive/*.log /usr/local/texlive/texmf-var/web2c/*.log /usr/local/texlive/tlpkg/texlive.tlpdb.main.*
 ENV PATH ${PATH}:/usr/local/texlive/bin/x86_64-linux:/usr/local/texlive/bin/aarch64-linux
