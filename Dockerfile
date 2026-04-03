@@ -26,6 +26,22 @@ RUN curl -o "/tmp/ltex-ls-${LTEX_VERSION}.tar.gz" -L "https://github.com/valentj
 
 
 FROM debian:bookworm-slim
+ENV USER_ID=1000
+ENV GROUP_ID=1000
+ENV USER_NAME=container-user
+ENV GROUP_NAME=container-user
+
+RUN addgroup -g $GROUP_ID $GROUP_NAME && \
+    adduser --shell /bin/bash --disabled-password \
+    --uid $USER_ID --ingroup $GROUP_NAME $USER_NAME 
+
+# Ensure /home/container-user is owned by container-user
+RUN mkdir -p /home/container-user/.vscode-server && \
+    chown -R $USER_NAME:$GROUP_NAME /home/container-user
+
+RUN mkdir -p /home/container-user/project && \
+    chown -R $USER_NAME:$GROUP_NAME /home/container-user
+    
 RUN apt-get update -yqq && \
     apt-get install -yqq --no-install-recommends \
     ca-certificates \
@@ -41,7 +57,10 @@ RUN apt-get update -yqq && \
     tar \
     wget && \
     update-ca-certificates
+
+USER $USER_NAME
 # TEXLIVE
+
 WORKDIR /tmp/texlive
 ARG TEX_SCHEME=small
 RUN wget -qO- https://ctan.mirror.cherryfox.dev/systems/texlive/tlnet/install-tl-unx.tar.gz | tar -xz --strip-components=1 && \
@@ -63,8 +82,8 @@ COPY --from=ltexls /usr/share/ltex-ls /usr/share/ltex-ls
 COPY --from=chktex /tmp/chktex /usr/local/bin/chktex
 # CLEANUP
 RUN rm -rf /tmp/texlive && \
-    apt-get remove -y cpanminus make gcc libc6-dev && \
-    apt-get clean autoclean && \
-    apt-get autoremove -y && \
+    sudo apt-get remove -y cpanminus make gcc libc6-dev && \
+    sudo apt-get clean autoclean && \
+    sudo apt-get autoremove -y && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 WORKDIR /workspace
