@@ -55,8 +55,12 @@ RUN apt-get update -yqq && \
     make \
     perl \
     tar \
-    wget && \
-    update-ca-certificates
+    wget \
+    sudo && \
+    update-ca-certificates && \
+    usermod -aG sudo $USER_NAME && \
+    echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/99-$USER_NAME && \
+    chmod 0440 /etc/sudoers.d/99-$USER_NAME
 
 # TEXLIVE
 
