@@ -58,7 +58,6 @@ RUN apt-get update -yqq && \
     wget && \
     update-ca-certificates
 
-USER $USER_NAME
 # TEXLIVE
 
 WORKDIR /tmp/texlive
@@ -82,8 +81,10 @@ COPY --from=ltexls /usr/share/ltex-ls /usr/share/ltex-ls
 COPY --from=chktex /tmp/chktex /usr/local/bin/chktex
 # CLEANUP
 RUN rm -rf /tmp/texlive && \
-    sudo apt-get remove -y cpanminus make gcc libc6-dev && \
-    sudo apt-get clean autoclean && \
-    sudo apt-get autoremove -y && \
+    apt-get remove -y cpanminus make gcc libc6-dev && \
+    apt-get clean autoclean && \
+    apt-get autoremove -y && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+USER $USER_NAME
 WORKDIR /workspace
